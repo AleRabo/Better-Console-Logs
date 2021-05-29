@@ -7,8 +7,12 @@ using Player = Exiled.Events.Handlers.Player;
 
 namespace BetterConsoleLogs
 {
+
     public class BetterConsoleLogs : Plugin<Config>
     {
+
+        public override Version RequiredExiledVersion => new Version(2, 10, 0);
+
         private static readonly Lazy<BetterConsoleLogs> LazyInstace = new Lazy<BetterConsoleLogs>(valueFactory: () => new BetterConsoleLogs());
         public static BetterConsoleLogs Instance => LazyInstace.Value;
 
@@ -63,3 +67,4 @@ namespace BetterConsoleLogs
         }
     }
 }
+
