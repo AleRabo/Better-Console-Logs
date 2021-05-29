@@ -1,5 +1,6 @@
 # Better-Console-Logs
-More logs for youre console
+
+More logs for youre console, Require [Exiled v2.10.0](https://github.com/Exiled-Team/EXILED/releases/tag/2.10.0-beta)
 
 
 Config:
