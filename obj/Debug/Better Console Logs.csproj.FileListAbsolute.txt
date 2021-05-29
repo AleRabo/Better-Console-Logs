@@ -1,0 +1,15 @@
+C:\Users\admin\source\repos\Better_Console_Logs\Better Console Logs\bin\Debug\Better Console Logs.dll
+C:\Users\admin\source\repos\Better_Console_Logs\Better Console Logs\bin\Debug\Better Console Logs.pdb
+C:\Users\admin\source\repos\Better_Console_Logs\Better Console Logs\bin\Debug\Assembly-CSharp.dll
+C:\Users\admin\source\repos\Better_Console_Logs\Better Console Logs\bin\Debug\Exiled.API.dll
+C:\Users\admin\source\repos\Better_Console_Logs\Better Console Logs\bin\Debug\Exiled.Events.dll
+C:\Users\admin\source\repos\Better_Console_Logs\Better Console Logs\bin\Debug\Exiled.Loader.dll
+C:\Users\admin\source\repos\Better_Console_Logs\Better Console Logs\bin\Debug\System.Memory.dll
+C:\Users\admin\source\repos\Better_Console_Logs\Better Console Logs\bin\Debug\System.Buffers.dll
+C:\Users\admin\source\repos\Better_Console_Logs\Better Console Logs\bin\Debug\Exiled.Permissions.dll
+C:\Users\admin\source\repos\Better_Console_Logs\Better Console Logs\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\admin\source\repos\Better_Console_Logs\Better Console Logs\obj\Debug\Better Console Logs.csprojAssemblyReference.cache
+C:\Users\admin\source\repos\Better_Console_Logs\Better Console Logs\obj\Debug\Better Console Logs.csproj.CoreCompileInputs.cache
+C:\Users\admin\source\repos\Better_Console_Logs\Better Console Logs\obj\Debug\Better Console Logs.csproj.CopyComplete
+C:\Users\admin\source\repos\Better_Console_Logs\Better Console Logs\obj\Debug\Better Console Logs.dll
+C:\Users\admin\source\repos\Better_Console_Logs\Better Console Logs\obj\Debug\Better Console Logs.pdb
