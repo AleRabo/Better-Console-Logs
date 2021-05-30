@@ -10,13 +10,13 @@ namespace BetterConsoleLogs
 
     public class BetterConsoleLogs : Plugin<Config>
     {
+        public override string Author { get; } = "AleRabo";
 
-        public override Version RequiredExiledVersion => new Version(2, 10, 0);
+        public override string Name { get; } = "BetterConsoleLogs";
 
-        private static readonly Lazy<BetterConsoleLogs> LazyInstace = new Lazy<BetterConsoleLogs>(valueFactory: () => new BetterConsoleLogs());
-        public static BetterConsoleLogs Instance => LazyInstace.Value;
+        public override string Prefix { get; } = "BCL";
 
-        public override PluginPriority Priority { get; } = PluginPriority.Medium;
+        public override Version Version { get; } = new Version(1, 0, 2);
 
         private Handlers.Player player;
         private Handlers.Server server;
@@ -28,22 +28,29 @@ namespace BetterConsoleLogs
         public override void OnEnabled()
         {
             RegisterEvents();
+
+            base.OnEnabled();
+
+            BetterConsoleLogs.Singleton = this;
         }
 
         public override void OnDisabled()
         {
             UnregisteredEvents();
+
+            base.OnDisabled();
         }
 
         public void RegisterEvents()
         {
+
             player = new Handlers.Player();
             server = new Handlers.Server();
 
             Server.RoundStarted += server.OnRoundStarted;
 
             Player.Left += player.OnLeft;
-            Player.Joined += player.OnJoined;
+            Player.Verified += player.OnVerified;
             Player.InteractingDoor += player.OnInteractingDoor;
             Player.InsertingGeneratorTablet += player.OnActivatingGenerator;
             Player.InteractingElevator += player.OnCallingElevator;
@@ -56,15 +63,12 @@ namespace BetterConsoleLogs
             Server.RoundStarted -= server.OnRoundStarted;
 
             Player.Left -= player.OnLeft;
-            Player.Joined -= player.OnJoined;
+            Player.Verified -= player.OnVerified;
             Player.InteractingDoor -= player.OnInteractingDoor;
             Player.InsertingGeneratorTablet -= player.OnActivatingGenerator;
             Player.InteractingElevator -= player.OnCallingElevator;
             Player.IntercomSpeaking -= player.OnSpeakingIntercom;
-
-            player = null;
-            server = null;
-        }
     }
+    public static BetterConsoleLogs Singleton;
 }
-
+}
