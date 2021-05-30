@@ -29,6 +29,8 @@ namespace BetterConsoleLogs
         {
             RegisterEvents();
 
+            Log.Info("Better Console Logs is enabled! Thank you!!! - AleRabo");
+
             base.OnEnabled();
 
             BetterConsoleLogs.Singleton = this;
@@ -37,6 +39,8 @@ namespace BetterConsoleLogs
         public override void OnDisabled()
         {
             UnregisteredEvents();
+
+            Log.Error("Better Console Logs is not enabled. To enable it just set is_enabled to true in configs");
 
             base.OnDisabled();
         }
@@ -48,7 +52,13 @@ namespace BetterConsoleLogs
             server = new Handlers.Server();
 
             Server.RoundStarted += server.OnRoundStarted;
+            Server.RespawningTeam += server.OnRespawningTeam;
+            Server.SendingConsoleCommand += server.OnSendingConsoleCommand;
+            Server.ReportingCheater += server.OnReportingCheater;
+            Server.LocalReporting += server.OnLocalReporting;
 
+            Player.Hurting += server.OnHurting;
+            Player.Died += server.OnDeath;
             Player.Left += player.OnLeft;
             Player.Verified += player.OnVerified;
             Player.InteractingDoor += player.OnInteractingDoor;
@@ -61,7 +71,14 @@ namespace BetterConsoleLogs
         {
 
             Server.RoundStarted -= server.OnRoundStarted;
+            Server.RespawningTeam -= server.OnRespawningTeam;
+            Server.SendingConsoleCommand -= server.OnSendingConsoleCommand;
+            Server.ReportingCheater -= server.OnReportingCheater;
+            Server.LocalReporting -= server.OnLocalReporting;
 
+
+            Player.Hurting -= server.OnHurting;
+            Player.Died -= server.OnDeath;
             Player.Left -= player.OnLeft;
             Player.Verified -= player.OnVerified;
             Player.InteractingDoor -= player.OnInteractingDoor;
