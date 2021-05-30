@@ -10,4 +10,3 @@ namespace BetterConsoleLogs
         [Description("are RA command logs enabled?")]
         public bool CommandLogs { get; set; } = false;
     }
-}
