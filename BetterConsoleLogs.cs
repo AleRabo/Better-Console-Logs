@@ -1,91 +1,92 @@
-using System;
-using Exiled.API.Enums;
-using Exiled.API.Features;
-
-using Server = Exiled.Events.Handlers.Server;
-using Player = Exiled.Events.Handlers.Player;
+// -----------------------------------------------------------------------
+// <copyright file="Plugin.cs" company="AleRabo">
+// Copyright (c) AleRabo. All rights reserved.
+// Licensed under the CC BY-SA 3.0 license.
+// </copyright>
+// -----------------------------------------------------------------------
 
 namespace BetterConsoleLogs
 {
+    using BetterConsoleLogs.EventHandlers;
+    using Exiled.API.Features;
+    using PlayerHandlers = Exiled.Events.Handlers.Player;
+    using ServerHandlers = Exiled.Events.Handlers.Server;
 
-    public class BetterConsoleLogs : Plugin<Config>
+    /// <summary>
+    /// The main plugin class.
+    /// </summary>
+    public class Plugin : Plugin<Config>
     {
-        public override string Author { get; } = "AleRabo";
+        private static readonly Plugin InstanceValue = new Plugin();
 
-        public override string Name { get; } = "BetterConsoleLogs";
+        private Plugin()
+        {
+        }
 
+        /// <summary>
+        /// Gets an instance of the <see cref="Plugin"/> class.
+        /// </summary>
+        public static Plugin Instance { get; } = InstanceValue;
+
+        /// <inheritdoc />
         public override string Prefix { get; } = "BCL";
 
-        public override Version Version { get; } = new Version(1, 0, 2);
+        /// <summary>
+        /// Gets an instance of the <see cref="EventHandlers.PlayerEvents"/> class.
+        /// </summary>
+        public PlayerEvents PlayerEvents { get; private set; }
 
-        private Handlers.Player player;
-        private Handlers.Server server;
+        /// <summary>
+        /// Gets an instance of the <see cref="EventHandlers.ServerEvents"/> class.
+        /// </summary>
+        public ServerEvents ServerEvents { get; private set; }
 
-        private BetterConsoleLogs()
-        {
-        }
-
+        /// <inheritdoc />
         public override void OnEnabled()
         {
-            RegisterEvents();
+            ServerEvents = new ServerEvents();
+            PlayerEvents = new PlayerEvents();
 
-            Log.Info("Better Console Logs is enabled! Thank you!!! - AleRabo");
+            PlayerHandlers.Hurting += PlayerEvents.OnHurting;
+            PlayerHandlers.Died += PlayerEvents.OnDied;
+            PlayerHandlers.Destroying += PlayerEvents.OnDestroying;
+            PlayerHandlers.Verified += PlayerEvents.OnVerified;
+            PlayerHandlers.InteractingDoor += PlayerEvents.OnInteractingDoor;
+            PlayerHandlers.InsertingGeneratorTablet += PlayerEvents.OnInsertingGeneratorTablet;
+            PlayerHandlers.InteractingElevator += PlayerEvents.OnInteractingElevator;
+            PlayerHandlers.IntercomSpeaking += PlayerEvents.OnIntercomSpeaking;
+
+            ServerHandlers.RoundStarted += ServerEvents.OnRoundStarted;
+            ServerHandlers.RespawningTeam += ServerEvents.OnRespawningTeam;
+            ServerHandlers.SendingRemoteAdminCommand += ServerEvents.OnSendingRACommand;
+            ServerHandlers.ReportingCheater += ServerEvents.OnReportingCheater;
+            ServerHandlers.LocalReporting += ServerEvents.OnLocalReporting;
 
             base.OnEnabled();
-
-            BetterConsoleLogs.Singleton = this;
         }
 
+        /// <inheritdoc />
         public override void OnDisabled()
         {
-            UnregisteredEvents();
+            PlayerHandlers.Hurting -= PlayerEvents.OnHurting;
+            PlayerHandlers.Died -= PlayerEvents.OnDied;
+            PlayerHandlers.Destroying -= PlayerEvents.OnDestroying;
+            PlayerHandlers.Verified -= PlayerEvents.OnVerified;
+            PlayerHandlers.InteractingDoor -= PlayerEvents.OnInteractingDoor;
+            PlayerHandlers.InsertingGeneratorTablet -= PlayerEvents.OnInsertingGeneratorTablet;
+            PlayerHandlers.InteractingElevator -= PlayerEvents.OnInteractingElevator;
+            PlayerHandlers.IntercomSpeaking -= PlayerEvents.OnIntercomSpeaking;
 
-            Log.Error("Better Console Logs is not enabled. To enable it just set is_enabled to true in configs");
+            ServerHandlers.RoundStarted -= ServerEvents.OnRoundStarted;
+            ServerHandlers.RespawningTeam -= ServerEvents.OnRespawningTeam;
+            ServerHandlers.SendingRemoteAdminCommand -= ServerEvents.OnSendingRACommand;
+            ServerHandlers.ReportingCheater -= ServerEvents.OnReportingCheater;
+            ServerHandlers.LocalReporting -= ServerEvents.OnLocalReporting;
 
+            PlayerEvents = null;
+            ServerEvents = null;
             base.OnDisabled();
         }
-
-        public void RegisterEvents()
-        {
-
-            player = new Handlers.Player();
-            server = new Handlers.Server();
-
-            Server.RoundStarted += server.OnRoundStarted;
-            Server.RespawningTeam += server.OnRespawningTeam;
-            Server.SendingConsoleCommand += server.OnSendingConsoleCommand;
-            Server.ReportingCheater += server.OnReportingCheater;
-            Server.LocalReporting += server.OnLocalReporting;
-
-            Player.Hurting += server.OnHurting;
-            Player.Died += server.OnDeath;
-            Player.Left += player.OnLeft;
-            Player.Verified += player.OnVerified;
-            Player.InteractingDoor += player.OnInteractingDoor;
-            Player.InsertingGeneratorTablet += player.OnActivatingGenerator;
-            Player.InteractingElevator += player.OnCallingElevator;
-            Player.IntercomSpeaking += player.OnSpeakingIntercom;
-        }
-
-        public void UnregisteredEvents()
-        {
-
-            Server.RoundStarted -= server.OnRoundStarted;
-            Server.RespawningTeam -= server.OnRespawningTeam;
-            Server.SendingConsoleCommand -= server.OnSendingConsoleCommand;
-            Server.ReportingCheater -= server.OnReportingCheater;
-            Server.LocalReporting -= server.OnLocalReporting;
-
-
-            Player.Hurting -= server.OnHurting;
-            Player.Died -= server.OnDeath;
-            Player.Left -= player.OnLeft;
-            Player.Verified -= player.OnVerified;
-            Player.InteractingDoor -= player.OnInteractingDoor;
-            Player.InsertingGeneratorTablet -= player.OnActivatingGenerator;
-            Player.InteractingElevator -= player.OnCallingElevator;
-            Player.IntercomSpeaking -= player.OnSpeakingIntercom;
     }
-    public static BetterConsoleLogs Singleton;
 }
-}
+
