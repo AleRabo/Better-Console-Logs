@@ -14,3 +14,21 @@ better_console_logs:
 
 
 ![img](https://img.shields.io/github/downloads/AleRabo/Better-Console-Logs/total?style=for-the-badge)
+
+![img](https://i.imgur.com/3qDT8uw.png)
+
+![img](https://i.imgur.com/AB6JFc1.png)
+
+![img](https://i.imgur.com/svr0PTu.png)
+
+![img](https://i.imgur.com/nGjJVDe.png)
+
+![img](https://i.imgur.com/QhwnfYu.png)
+
+![img](https://i.imgur.com/XjIb3uy.png)
+
+![img](https://i.imgur.com/p6f2Jvm.png)
+
+![img](https://i.imgur.com/lwOKb7b.png)
+
+![img](https://i.imgur.com/MaZor21.png)
